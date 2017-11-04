@@ -1,0 +1,119 @@
+[
+	{
+		"projectlongId" : "0001",
+		"projectId" : 1,
+		"project" : "JDK",
+		"user" : "",
+		"password" : "",
+		"server" : "",
+		"serverType" : ""
+	},
+	{
+		"projectlongId" : "0002",
+		"projectId" : 2,
+		"project" : "jEdit",
+		"user" : "",
+		"password" : "",
+		"server" : "https://jedit.svn.sourceforge.net/svnroot/jedit/jEdit",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0003",
+		"projectId" : 3,
+		"project" : "JDK6",
+		"user" : "agtorres",
+		"password" : "Chifero1",
+		"server" : "https://jdk-jrl-sources.dev.java.net/svn/jdk-jrl-sources/jdk6",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0004",
+		"projectId" : 4,
+		"project" : "JDK7",
+		"user" : "agtorres",
+		"password" : "",
+		"server" : "https://jdk-jrl-sources.dev.java.net/svn/jdk-jrl-sources/jdk7",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0005",
+		"projectId" : 5,
+		"project" : "FreeCol",
+		"user" : "",
+		"password" : "",
+		"server" : "https://freecol.svn.sourceforge.net/svnroot/freecol/freecol",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0006",
+		"projectId" : 6,
+		"project" : "Jmol",
+		"user" : "",
+		"password" : "",
+		"server" : "https://jmol.svn.sourceforge.net/svnroot/jmol",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0007",
+		"projectId" : 7,
+		"project" : "JabRef",
+		"user" : "",
+		"password" : "",
+		"server" : "https://jabref.svn.sourceforge.net/svnroot/jabref",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0009",
+		"projectId" : 9,
+		"project" : "ArgoUML",
+		"user" : "guest",
+		"password" : "",
+		"server" : "http://argouml.tigris.org/svn/argouml",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0010",
+		"projectId" : 10,
+		"project" : "Weka",
+		"user" : "",
+		"password" : "",
+		"server" : "https://svn.cms.waikato.ac.nz/svn/weka/trunk/weka",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0011",
+		"projectId" : 11,
+		"project" : "JBossWeb",
+		"user" : "",
+		"password" : "",
+		"server" : "http://anonsvn.jboss.org/repos/jbossweb/",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0012",
+		"projectId" : 12,
+		"project" : "JFreeChart",
+		"user" : "",
+		"password" : "",
+		"server" : "http://svn.code.sf.net/p/jfreechart/code",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0013",
+		"projectId" : 13,
+		"project" : "Spring",
+		"user" : "anonymous",
+		"password" : "springframework",
+		"server" : "https://springframework.svn.sourceforge.net/svnroot/springframework ",
+		"serverType" : "Subversion"
+	},
+	{
+		"projectlongId" : "0014",
+		"projectId" : 14,
+		"project" : "Tomcat",
+		"user" : "",
+		"password" : "",
+		"server" : "http://svn.apache.org/repos/asf/tomcat/trunk",
+		"serverType" : "Subversion"
+	}
+]
