@@ -1,89 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Software Visualization</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <title>Software Visualization</title>
+      <!-- Bootstrap core CSS -->
+      <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom styles for thsis template -->
+      <link href="css/simple-sidebar.css" rel="stylesheet">
+   </head>
+   <body>
+      <div id="wrapper">
+         <!-- Sidebar -->
+         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Filters
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Filter 01</a>
-                </li>
-                <li>
-                    <a href="#">Filter 02</a>
-                </li>
-                <li>
-                    <a href="#">Filter 03</a>
-                </li>
-                <li>
-                    <a href="#">Filter 04</a>
-                </li>
-                <li>
-                    <a href="#">Filter 05</a>
-                </li>
+               <li class="sidebar-brand">
+                  <a href="#">
+                  Projects
+                  </a>
+               </li>
+               <li>
+                  <a href="#">Project 01</a>
+               </li>
+               <li>
+                  <a href="#">Project 02</a>
+               </li>
+               <li>
+                  <a href="#">Project 03</a>
+               </li>
+               <li>
+                  <a href="#">Project 04</a>
+               </li>
+               <li>
+                  <a href="#">Project 05</a>
+               </li>
             </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
+         </div>
+         <!-- /#sidebar-wrapper -->
+         <!-- Page Content -->
+         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <h1>Project Name</h1>
-                <p>Project description</p>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menu</a>
+               <h1>Project Name</h1>
+               <p>Project description</p>
+               <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menu</a>
             </div>
-
             <br>
-            <div class="jumbotron">
-                <h1>12/FEB/2007</h1>
-                <iframe src="./Test01/index.html" height="200" width="600"></iframe>
-                <iframe src="./Test01/index.html" height="200" width="600"></iframe>
-                <iframe src="./Test01/index.html" height="200" width="600"></iframe>
-              </div>
-
-        </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
-</body>
-
+            <div class="row">
+               <div class="col-md-6 text-center">
+                  <div class="box">
+                     <div class="box-content">
+                        <h1 class="tag-title">Overview | 15/MAY/2016</h1>
+                        <!-- Es donde se manda a llamar a los treemaps -->
+                        <div>
+                           <iframe src="./treemap01.html" marginwidth="0" marginheight="0" width="500" height="500" scrolling="no"></iframe>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 text-center">
+                  <div class="box">
+                     <div class="box-content">
+                        <h1 class="tag-title">Details | 15/MAY/2016</h1>
+                        <div>
+                           <iframe src="./treemap01.html" marginwidth="0" marginheight="0" width="900" height="500" scrolling="no"></iframe>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6 text-center">
+                  <div class="box">
+                     <div class="box-content">
+                        <h1 class="tag-title">Overview | 16/NOV/2017</h1>
+                        <div>
+                           <iframe src="./treemap01.html" marginwidth="0" marginheight="0" width="500" height="500" scrolling="no"></iframe>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 text-center">
+                  <div class="box">
+                     <div class="box-content">
+                        <h1 class="tag-title">Details | 16/NOV/2017</h1>
+                        <div>
+                           <iframe src="./treemap01.html" marginwidth="0" marginheight="0" width="900" height="500" scrolling="no"></iframe>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Menu Toggle Script -->
+      <script>
+         $("#menu-toggle").click(function (e) {
+             e.preventDefault();
+             $("#wrapper").toggleClass("toggled");
+         });
+      </script>
+   </body>
 </html>
