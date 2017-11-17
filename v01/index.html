@@ -10,6 +10,52 @@
       <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for thsis template -->
       <link href="css/simple-sidebar.css" rel="stylesheet">
+      <script src="vis.js"></script>
+     <link href="vis.css" rel="stylesheet" type="text/css" />
+     <style>
+     .vis-item {
+       border-color: orange;
+       background-color: yellow;
+     }
+
+     .vis-time-axis .vis-monday, .vis-time-axis .vis-tuesday, 
+     .vis-time-axis .vis-wednesday, .vis-time-axis .vis-thursday, 
+     .vis-time-axis .vis-friday, .vis-time-axis .vis-saturday, 
+     .vis-time-axis .vis-sunday {
+       background: #43d4d8;
+     }
+     /* gray background in weekends, white text color */
+     .vis-time-axis .vis-grid.vis-saturday,
+     .vis-time-axis .vis-grid.vis-sunday {
+       background: #330066;
+     }
+     .vis-time-axis .vis-text.vis-saturday,
+     .vis-time-axis .vis-text.vis-sunday {
+       color: #006666;
+     }
+     .vis-time-axis .vis-january, .vis-time-axis .vis-february, 
+     .vis-time-axis .vis-march, .vis-time-axis .vis-april, 
+     .vis-time-axis .vis-may, .vis-time-axis .vis-june, .vis-time-axis .vis-july, 
+     .vis-time-axis .vis-august, .vis-time-axis .vis-september, 
+     .vis-time-axis .vis-october, .vis-time-axis .vis-november, 
+     .vis-time-axis .vis-december {
+       background: #A8A8A8;
+     }
+     .vis-time-axis .vis-year2028, .vis-time-axis .vis-year2027,
+     .vis-time-axis .vis-year2018, .vis-time-axis .vis-year2026,
+     .vis-time-axis .vis-year2017, .vis-time-axis .vis-year2025,
+     .vis-time-axis .vis-year2016, .vis-time-axis .vis-year2024,
+     .vis-time-axis .vis-year2015, .vis-time-axis .vis-year2013,
+     .vis-time-axis .vis-year2014, .vis-time-axis .vis-year2012,
+     .vis-time-axis .vis-year2023, .vis-time-axis .vis-year2022,
+     .vis-time-axis .vis-year2021, .vis-time-axis .vis-year2020,
+     .vis-time-axis .vis-year2019, .vis-time-axis .vis-year2011,
+     .vis-time-axis .vis-year2010, .vis-time-axis .vis-year2009,
+     .vis-time-axis .vis-year2008, .vis-time-axis .vis-year2007,
+     .vis-time-axis .vis-year2006, .vis-time-axis .vis-year2005{
+      background: #680000;
+     }
+   </style>
    </head>
    <body>
       <div id="wrapper">
@@ -92,6 +138,7 @@
                   </div>
                </div>
             </div>
+            <div id="visualization"></div>
          </div>
       </div>
       </div>
@@ -107,5 +154,25 @@
              $("#wrapper").toggleClass("toggled");
          });
       </script>
+      <script type="text/javascript">
+     // DOM element where the Timeline will be attached
+     var container = document.getElementById('visualization');
+
+     // Create a DataSet (allows two way data-binding)
+     var items = new vis.DataSet([
+       {id: 1, content: 'item 1', start: '2013-04-20'},
+       {id: 2, content: 'item 2', start: '2013-04-14'},
+       {id: 3, content: 'item 3', start: '2013-04-18'},
+       {id: 4, content: 'item 4', start: '2013-04-16', end: '2013-04-19'},
+       {id: 5, content: 'item 5', start: '2013-04-25'},
+       {id: 6, content: 'item 6', start: '2013-04-27'}
+     ]);
+
+     // Configuration for the Timeline
+     var options = {};
+
+     // Create a Timeline
+     var timeline = new vis.Timeline(container, items, options);
+   </script>
    </body>
 </html>
