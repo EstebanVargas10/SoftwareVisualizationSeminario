@@ -2,64 +2,22 @@
 <html lang="en">
    <head>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <title>Orion Software Visualization</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
       <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Orion Software Visualization</title>
+      <!--CDNs-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <!-- Bootstrap core CSS -->
       <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-      <!-- Custom styles for thsis template -->
+      <!-- CSS -->
       <link href="css/simple-sidebar.css" rel="stylesheet">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="vis.js"></script>
+      <link rel="stylesheet" href="css/style.css">
+      <!-- JS -->
       <script src="js/orion.js"></script>
-     <link href="vis.css" rel="stylesheet" type="text/css" />
-     <style>
-     .vis-item {
-       border-color: orange;
-       background-color: yellow;
-     }
-
-     .vis-time-axis .vis-monday, .vis-time-axis .vis-tuesday, 
-     .vis-time-axis .vis-wednesday, .vis-time-axis .vis-thursday, 
-     .vis-time-axis .vis-friday, .vis-time-axis .vis-saturday, 
-     .vis-time-axis .vis-sunday {
-       background: #43d4d8;
-     }
-     /* gray background in weekends, white text color */
-     .vis-time-axis .vis-grid.vis-saturday,
-     .vis-time-axis .vis-grid.vis-sunday {
-       background: #330066;
-     }
-     .vis-time-axis .vis-text.vis-saturday,
-     .vis-time-axis .vis-text.vis-sunday {
-       color: #006666;
-     }
-     .vis-time-axis .vis-january, .vis-time-axis .vis-february, 
-     .vis-time-axis .vis-march, .vis-time-axis .vis-april, 
-     .vis-time-axis .vis-may, .vis-time-axis .vis-june, .vis-time-axis .vis-july, 
-     .vis-time-axis .vis-august, .vis-time-axis .vis-september, 
-     .vis-time-axis .vis-october, .vis-time-axis .vis-november, 
-     .vis-time-axis .vis-december {
-       background: #A8A8A8;
-     }
-     .vis-time-axis .vis-year2028, .vis-time-axis .vis-year2027,
-     .vis-time-axis .vis-year2018, .vis-time-axis .vis-year2026,
-     .vis-time-axis .vis-year2017, .vis-time-axis .vis-year2025,
-     .vis-time-axis .vis-year2016, .vis-time-axis .vis-year2024,
-     .vis-time-axis .vis-year2015, .vis-time-axis .vis-year2013,
-     .vis-time-axis .vis-year2014, .vis-time-axis .vis-year2012,
-     .vis-time-axis .vis-year2023, .vis-time-axis .vis-year2022,
-     .vis-time-axis .vis-year2021, .vis-time-axis .vis-year2020,
-     .vis-time-axis .vis-year2019, .vis-time-axis .vis-year2011,
-     .vis-time-axis .vis-year2010, .vis-time-axis .vis-year2009,
-     .vis-time-axis .vis-year2008, .vis-time-axis .vis-year2007,
-     .vis-time-axis .vis-year2006, .vis-time-axis .vis-year2005{
-      background: #680000;
-     }
-   </style>
+      <script src="js/timeline.js"></script>
    </head>
    <body>
       <div id="wrapper">
@@ -125,7 +83,10 @@
                   </div>
                </div>
             </div>
-            <div id="visualization"></div>
+            <div id="lineCont"> 
+              <div id="line2"></div>
+              <div id="line"></div>
+            </div>
          </div>
       </div>
       </div>
