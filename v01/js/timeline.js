@@ -13,7 +13,22 @@ $(document).ready(function(){
 
             success: function (data, status) {
 
-                getYearsFromApi(data);
+                 var years = [];
+                 var exist = false;
+
+                 for(var i = 0; i<data.resultado.length; i++){
+                        for(var j = 0; j<years.length; j++){
+                          if(data.resultado[i].year == years[j]){
+                            exist = true;
+                          }
+                        }if(!exist){
+                          years.push(data.resultado[i].year);
+                        }
+                        exist = false;
+                 }
+                 years.sort();
+                 makeYearsCircles(years[0], years[years.length -1], years);
+                 makeMonthsCircles();
             },
 
             error: function (jqXHR, textStatus, errorThrown) {
@@ -25,26 +40,6 @@ $(document).ready(function(){
         console.log("Ocurrio un error: " + err);
     }// fin catch
 });
-   
-
-function getYearsFromApi(projectDates){
-   var years = [];
-   var exist = false;
-
-   for(var i = 0; i<projectDates.resultado.length; i++){
-          for(var j = 0; j<years.length; j++){
-            if(projectDates.resultado[i].year == years[j]){
-              exist = true;
-            }
-          }if(!exist){
-            years.push(projectDates.resultado[i].year);
-          }
-          exist = false;
-   }
-   years.sort();
-   makeYearsCircles(years[0], years[years.length -1], years);
-   makeMonthsCircles();
-}
 
 //Main function. Draw your circles.
 function makeYearsCircles(first, last, dates) {
@@ -76,10 +71,23 @@ function makeYearsCircles(first, last, dates) {
     }
 
     //Draw the last date circle
-    $("#line").append('<div class="circle" id="circle' + i + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + dates[dates.length - 1] + '</div></div>');
+    $("#line").append('<div class="circle" id="circle' + (dates.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + dates[dates.length - 1] + '</div></div>');
   }
 
   $(".circle:first").addClass("active");
+
+  $(".circle").mouseenter(function() {
+    $(this).addClass("hover");
+  });
+
+  $(".circle").mouseleave(function() {
+    $(this).removeClass("hover");
+  });
+
+  $(".circle").click(function() {
+    var spanNum = $(this).attr("id");
+    selectDate(spanNum);
+  });
 }
 
 function makeMonthsCircles() {
@@ -99,32 +107,29 @@ function makeMonthsCircles() {
     //Loop through middle months
     for (var l = 1; l < months.length - 1; l++) {
 
-      //Integer relative to the first and last months
-      relativeInt += 8;
-
       //Draw the date circle
-      $("#line2").append('<div class="circle" id="month' + l + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + months[l] + '</div></div>');
+      $("#line2").append('<div class="circle" id="month' + l + '" style="left: ' + l * 9 + '%;"><div class="popupSpan">' + months[l] + '</div></div>');
     }
 
     //Draw the last date circle
-    $("#line2").append('<div class="circle" id="month' + l + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + months[months.length - 1] + '</div></div>');
+    $("#line2").append('<div class="circle" id="month' + (months.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + months[months.length - 1] + '</div></div>');
   }
 
   $(".circle:first").addClass("active");
+
+  $(".circle").mouseenter(function() {
+    $(this).addClass("hover");
+  });
+
+  $(".circle").mouseleave(function() {
+    $(this).removeClass("hover");
+  });
+
+  $(".circle").click(function() {
+    var spanNum = $(this).attr("id");
+    selectDate(spanNum);
+  });
 }
-
-$(".circle").mouseenter(function() {
-  $(this).addClass("hover");
-});
-
-$(".circle").mouseleave(function() {
-  $(this).removeClass("hover");
-});
-
-$(".circle").click(function() {
-  var spanNum = $(this).attr("id");
-  selectDate(spanNum);
-});
 
 function selectDate(selector) {
   $selector = "#" + selector;
@@ -135,12 +140,12 @@ function selectDate(selector) {
   $($selector).addClass("active");
   
   if ($($spanSelector).hasClass("right")) {
-    $(".center").removeClass("center").addClass("left")
+    $(".center").removeClass("center").addClass("left");
     $($spanSelector).addClass("center");
-    $($spanSelector).removeClass("right")
+    $($spanSelector).removeClass("right");
   } else if ($($spanSelector).hasClass("left")) {
     $(".center").removeClass("center").addClass("right");
     $($spanSelector).addClass("center");
     $($spanSelector).removeClass("left");
-  }; 
-};
+  } 
+}
