@@ -26,9 +26,8 @@ $(document).ready(function(){
                         }
                         exist = false;
                  }
-                 years.sort();
+                 years.sort(function(a, b){return a-b;});
                  makeYearsCircles(years[0], years[years.length -1], years);
-                 makeMonthsCircles();
             },
 
             error: function (jqXHR, textStatus, errorThrown) {
@@ -40,6 +39,8 @@ $(document).ready(function(){
         console.log("Ocurrio un error: " + err);
     }// fin catch
 });
+
+var slectedYear, selectedMonth, selectedDay, selectedHour;
 
 //Main function. Draw your circles.
 function makeYearsCircles(first, last, dates) {
@@ -54,7 +55,7 @@ function makeYearsCircles(first, last, dates) {
     var lastInt = ((last - first) * 30) + (last - first);
 
     //Draw first date circle
-    $("#line").append('<div class="circle" id="circle0" style="left: ' + 0 + '%;"><div class="popupSpan">' + dates[0] + '</div></div>');
+    $("#line").append('<div class="circle circle1" id="circle0" style="left: ' + 0 + '%;"><div class="popupSpan">' + dates[0] + '</div></div>');
 
     //Loop through middle dates
     for (i = 1; i < dates.length - 1; i++) {
@@ -67,11 +68,11 @@ function makeYearsCircles(first, last, dates) {
       var relativeInt = thisInt / lastInt;
 
       //Draw the date circle
-      $("#line").append('<div class="circle" id="circle' + i + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + dates[i] + '</div></div>');
+      $("#line").append('<div class="circle circle1" id="circle' + i + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + dates[i] + '</div></div>');
     }
 
     //Draw the last date circle
-    $("#line").append('<div class="circle" id="circle' + (dates.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + dates[dates.length - 1] + '</div></div>');
+    $("#line").append('<div class="circle circle1" id="circle' + (dates.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + dates[dates.length - 1] + '</div></div>');
   }
 
   $(".circle:first").addClass("active");
@@ -84,9 +85,11 @@ function makeYearsCircles(first, last, dates) {
     $(this).removeClass("hover");
   });
 
-  $(".circle").click(function() {
-    var spanNum = $(this).attr("id");
+  $('.circle1').click(function() {
+    var spanNum = $(this).attr('id');
+    slectedYear = $(this).text();
     selectDate(spanNum);
+    makeMonthsCircles();
   });
 }
 
@@ -102,17 +105,17 @@ function makeMonthsCircles() {
     var relativeInt = 8;
 
     //Draw first date circle
-    $("#line2").append('<div class="circle" id="month0" style="left: ' + 0 + '%;"><div class="popupSpan">' + months[0] + '</div></div>');
+    $("#line2").append('<div class="circle circle2" id="month0" style="left: ' + 0 + '%;"><div class="popupSpan">' + months[0] + '</div></div>');
 
     //Loop through middle months
     for (var l = 1; l < months.length - 1; l++) {
 
       //Draw the date circle
-      $("#line2").append('<div class="circle" id="month' + l + '" style="left: ' + l * 9 + '%;"><div class="popupSpan">' + months[l] + '</div></div>');
+      $("#line2").append('<div class="circle circle2" id="month' + l + '" style="left: ' + l * 9 + '%;"><div class="popupSpan">' + months[l] + '</div></div>');
     }
 
     //Draw the last date circle
-    $("#line2").append('<div class="circle" id="month' + (months.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + months[months.length - 1] + '</div></div>');
+    $("#line2").append('<div class="circle circle2" id="month' + (months.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + months[months.length - 1] + '</div></div>');
   }
 
   $(".circle:first").addClass("active");
@@ -125,9 +128,107 @@ function makeMonthsCircles() {
     $(this).removeClass("hover");
   });
 
-  $(".circle").click(function() {
+  $(".circle2").click(function() {
     var spanNum = $(this).attr("id");
+    selectedMonth = parseInt($(this).attr("id").replace('month',''));
+    slectedMonth = selectedMonth + 1;
     selectDate(spanNum);
+    getApiDays();
+  });
+}
+
+function getApiDays(){
+  $("#line3").show();
+  try {
+        $.ajax({
+            async: true,
+            crossDomain: true,
+            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=0002",
+            type: 'GET',
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: false
+            },
+            processData: false,
+
+            success: function (data, status) {
+
+                 var days = [];
+                 var exist = false;
+
+                 for(var i = 0; i<data.resultado.length; i++){
+                  if(data.resultado[i].year == slectedYear && data.resultado[i].month == slectedMonth){
+                    for(var j = 0; j<days.length; j++){
+                          if(data.resultado[i].day == days[j]){
+                            exist = true;
+                          }
+                        }if(!exist){
+                          days.push(data.resultado[i].day);
+                        }
+                        exist = false;
+                  }
+                 }
+                 days.sort(function(a, b){return a-b;});
+                 makeDaysCircles(days[0], days[days.length -1], days);
+            },
+
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Estado de la conexión: " + textStatus + " ");
+                console.log("Error de conexión: " + errorThrown + " ");
+            }
+        });
+    } catch (err) {
+        console.log("Ocurrio un error: " + err);
+    }// fin catch
+}
+
+function makeDaysCircles(firstDay, lastDay, days){
+  //Forget the timeline if there's only one date. Who needs it!?
+  if (days.length < 2) {
+    $("#line3").hide();
+    //This is what you really want.
+  } else if (days.length >= 2) {
+
+    //Integer representation of the last day. The first day is represnted as 0
+    var lastInt = ((lastDay - firstDay) * 30) + (lastDay - firstDay);
+
+    //Draw first date circle
+    $("#line3").append('<div class="circle circle3" id="day0" style="left: ' + 0 + '%;"><div class="popupSpan">' + days[0] + '</div></div>');
+
+    //Loop through middle dates
+    for (i = 1; i < days.length - 1; i++) {
+      var thisDay = days[i];
+
+      //Integer representation of the date
+      var thisInt = ((thisDay - firstDay) * 30) + (thisDay - firstDay);
+
+      //Integer relative to the first and last dates
+      var relativeInt = thisInt / lastInt;
+
+      //Draw the date circle
+      $("#line3").append('<div class="circle circle3" id="day' + i + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + days[i] + '</div></div>');
+    }
+
+    //Draw the last date circle
+    $("#line3").append('<div class="circle circle3" id="day' + (days.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + days[days.length - 1] + '</div></div>');
+  }
+
+  $(".circle:first").addClass("active");
+
+  $(".circle").mouseenter(function() {
+    $(this).addClass("hover");
+  });
+
+  $(".circle").mouseleave(function() {
+    $(this).removeClass("hover");
+  });
+
+  $(".circle circle3").click(function() {
+    var spanNum = $(this).attr("id");
+    selectedDay = parseInt($(this).attr("id").replace('day',''));
+    selectedDay = selectedDay + 1;
+    selectDate(spanNum);
+    $("#overview1").text("Overview | "+selectedDay + "/"+slectedMonth +"/"+slectedYear);
   });
 }
 

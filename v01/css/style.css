@@ -31,6 +31,18 @@
   position: relative;
 }
 
+#line3 {
+  height: 6px;
+  width: 70%;
+  background: pink;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+}
+
 .circle {
   width: 20px;
   height: 20px;
