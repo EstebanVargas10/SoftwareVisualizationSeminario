@@ -1,9 +1,10 @@
-$(document).ready(function(){
+var originalApiInfo;
+function getApi(){
   try {
         $.ajax({
             async: true,
             crossDomain: true,
-            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=0002",
+            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=000" +projectId,
             type: 'GET',
             dataType: 'json',
             xhrFields: {
@@ -13,6 +14,7 @@ $(document).ready(function(){
 
             success: function (data, status) {
 
+                 originalApiInfo = data; 
                  var years = [];
                  var exist = false;
 
@@ -38,9 +40,9 @@ $(document).ready(function(){
     } catch (err) {
         console.log("Ocurrio un error: " + err);
     }// fin catch
-});
+}
 
-var slectedYear, selectedMonth, selectedDay, selectedHour;
+var slectedYear, selectedMonth, selectedDay, selectedRevision;
 
 //Main function. Draw your circles.
 function makeYearsCircles(first, last, dates) {
@@ -139,47 +141,23 @@ function makeMonthsCircles() {
 
 function getApiDays(){
   $("#line3").show();
-  try {
-        $.ajax({
-            async: true,
-            crossDomain: true,
-            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=0002",
-            type: 'GET',
-            dataType: 'json',
-            xhrFields: {
-                withCredentials: false
-            },
-            processData: false,
+   var days = [];
+   var exist = false;
 
-            success: function (data, status) {
-
-                 var days = [];
-                 var exist = false;
-
-                 for(var i = 0; i<data.resultado.length; i++){
-                  if(data.resultado[i].year == slectedYear && data.resultado[i].month == slectedMonth){
-                    for(var j = 0; j<days.length; j++){
-                          if(data.resultado[i].day == days[j]){
-                            exist = true;
-                          }
-                        }if(!exist){
-                          days.push(data.resultado[i].day);
-                        }
-                        exist = false;
-                  }
-                 }
-                 days.sort(function(a, b){return a-b;});
-                 makeDaysCircles(days[0], days[days.length -1], days);
-            },
-
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Estado de la conexión: " + textStatus + " ");
-                console.log("Error de conexión: " + errorThrown + " ");
+   for(var i = 0; i<originalApiInfo.resultado.length; i++){
+    if(originalApiInfo.resultado[i].year == slectedYear && originalApiInfo.resultado[i].month == slectedMonth){
+      for(var j = 0; j<days.length; j++){
+            if(originalApiInfo.resultado[i].day == days[j]){
+              exist = true;
             }
-        });
-    } catch (err) {
-        console.log("Ocurrio un error: " + err);
-    }// fin catch
+          }if(!exist){
+            days.push(originalApiInfo.resultado[i].day);
+          }
+          exist = false;
+    }
+   }
+   days.sort(function(a, b){return a-b;});
+   makeDaysCircles(days[0], days[days.length -1], days);
 }
 
 function makeDaysCircles(firstDay, lastDay, days){
@@ -223,12 +201,85 @@ function makeDaysCircles(firstDay, lastDay, days){
     $(this).removeClass("hover");
   });
 
-  $(".circle circle3").click(function() {
+  $(".circle3").click(function() {
     var spanNum = $(this).attr("id");
     selectedDay = parseInt($(this).attr("id").replace('day',''));
     selectedDay = selectedDay + 1;
     selectDate(spanNum);
     $("#overview1").text("Overview | "+selectedDay + "/"+slectedMonth +"/"+slectedYear);
+    $("#details1").text("Details | "+selectedDay + "/"+slectedMonth +"/"+slectedYear);
+    getApiRevisions();
+  });
+}
+
+function getApiRevisions(){
+  $("#line4").show();
+   var revisions = [];
+   var exist = false;
+
+   for(var i = 0; i<originalApiInfo.resultado.length; i++){
+    if(originalApiInfo.resultado[i].year == slectedYear && originalApiInfo.resultado[i].month == slectedMonth && originalApiInfo.resultado[i].day == selectedDay){
+      for(var j = 0; j<revisions.length; j++){
+            if(originalApiInfo.resultado[i].revision == revisions[j]){
+              exist = true;
+            }
+          }if(!exist){
+            revisions.push(originalApiInfo.resultado[i].revision);
+          }
+          exist = false;
+    }
+   }
+   makeRevisionsCircles(revisions);
+}
+
+function makeRevisionsCircles(revisions){
+  //Forget the timeline if there's only one date. Who needs it!?
+  if (revisions.length < 2) {
+    $("#line4").hide();
+    //This is what you really want.
+  } else if (revisions.length >= 2) {
+
+    //Integer representation of the last day. The first day is represnted as 0
+    var firstDay = 1;
+    var lastDay = revisions.length;
+    var lastInt = ((lastDay - firstDay) * 30) + (lastDay - firstDay);
+
+    //Draw first date circle
+    $("#line4").append('<div class="circle circle4" id="revision0" style="left: ' + 0 + '%;"><div class="popupSpan">' + revisions[0] + '</div></div>');
+
+    //Loop through middle dates
+    for (i = 1; i < revisions.length - 1; i++) {
+      var thisDay = i;
+
+      //Integer representation of the date
+      var thisInt = ((thisDay - firstDay) * 30) + (thisDay - firstDay);
+
+      //Integer relative to the first and last dates
+      var relativeInt = thisInt / lastInt;
+
+      //Draw the date circle
+      $("#line4").append('<div class="circle circle4" id="revision' + i + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + revisions[i] + '</div></div>');
+    }
+
+    //Draw the last date circle
+    $("#line4").append('<div class="circle circle4" id="revision' + (revisions.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + revisions[revisions.length - 1] + '</div></div>');
+  }
+
+  $(".circle:first").addClass("active");
+
+  $(".circle").mouseenter(function() {
+    $(this).addClass("hover");
+  });
+
+  $(".circle").mouseleave(function() {
+    $(this).removeClass("hover");
+  });
+
+  $(".circle4").click(function() {
+    var spanNum = $(this).attr("id");
+    selectedRevision = parseInt($(this).attr("id").replace('revision',''));
+    selectedRevision = selectedRevision + 1;
+    selectDate(spanNum);
   });
 }
 

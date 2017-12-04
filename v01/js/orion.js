@@ -1,4 +1,4 @@
-
+var projectId;
 $(document).ready(function(){
     var sideMenu = $("#sidebar-nav");
     var project;
@@ -18,11 +18,14 @@ $(document).ready(function(){
 
                 for(var i=0; i<data.resultado.length; i++){
                     project = JSON.stringify(data.resultado[i].project).replace(/"/g, '');
-                    sideMenu.append('<li><a href="#" class="projects">'+ project +'</a></li>');
+                    sideMenu.append('<li><a href="#" class="projects" id="project'+ (i+1)+'">'+ project +'</a></li>');
                 }
                 $('.projects').click(function() {
                     var spanNum = $(this).text();
                     $("#projectHeader").text(spanNum);
+                    projectId = parseInt($(this).attr("id").replace('project',''));
+                    console.log(projectId);
+                    getApi();
                 });
             },
 

@@ -10,7 +10,7 @@
 #line {
   height: 6px;
   width: 70%;
-  background: #20B2AA;
+  background: #346379;
   border-radius: 5px;
   margin: auto;
   margin-top: 30px;
@@ -22,7 +22,7 @@
 #line2 {
   height: 6px;
   width: 70%;
-  background: blue;
+  background: #F3B3A6;
   border-radius: 5px;
   margin: auto;
   margin-top: 30px;
@@ -34,7 +34,19 @@
 #line3 {
   height: 6px;
   width: 70%;
-  background: pink;
+  background: #D5896F;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+}
+
+#line4 {
+  height: 6px;
+  width: 70%;
+  background: #65AFFF;
   border-radius: 5px;
   margin: auto;
   margin-top: 30px;
