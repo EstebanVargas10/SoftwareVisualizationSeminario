@@ -1,0 +1,1 @@
+var selectedDay, selectedMonth, selectedYear, selectedPackage, selectedRevision;
