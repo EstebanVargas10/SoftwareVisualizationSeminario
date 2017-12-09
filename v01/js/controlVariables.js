@@ -1,1 +1,1 @@
-var selectedDay, selectedMonth, selectedYear, selectedPackage, selectedRevision;
+var selectedDay, selectedMonth, selectedYear, selectedPackage, selectedRevision, selectedProject;

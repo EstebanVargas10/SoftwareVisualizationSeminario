@@ -4,7 +4,7 @@ function getApi(){
         $.ajax({
             async: true,
             crossDomain: true,
-            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=000" +projectId,
+            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=000" +selectedProject,
             type: 'GET',
             dataType: 'json',
             xhrFields: {
@@ -33,6 +33,7 @@ function getApi(){
             },
 
             error: function (jqXHR, textStatus, errorThrown) {
+              alert("No existen fechas para ese paquete");
                 console.log("Estado de la conexión: " + textStatus + " ");
                 console.log("Error de conexión: " + errorThrown + " ");
             }
@@ -41,8 +42,6 @@ function getApi(){
         console.log("Ocurrio un error: " + err);
     }// fin catch
 }
-
-var slectedYear, selectedMonth, selectedDay, selectedRevision;
 
 //Main function. Draw your circles.
 function makeYearsCircles(first, last, dates) {
@@ -277,8 +276,8 @@ function makeRevisionsCircles(revisions){
 
   $(".circle4").click(function() {
     var spanNum = $(this).attr("id");
-    selectedRevision = parseInt($(this).attr("id").replace('revision',''));
-    selectedRevision = selectedRevision + 1;
+    selectedRevision = parseInt($(this).text());
+    getTreemapPackagesApi();
     selectDate(spanNum);
   });
 }

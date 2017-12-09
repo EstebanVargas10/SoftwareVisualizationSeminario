@@ -10,14 +10,20 @@
       <title>Orion Software Visualization</title>
       <!--CDNs-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <!-- Bootstrap core CSS -->
       <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <!-- CSS -->
       <link href="css/simple-sidebar.css" rel="stylesheet">
       <link rel="stylesheet" href="css/style.css">
       <!-- JS -->
+      <script type="text/javascript">
+         google.charts.load('current', {'packages':['treemap']});
+      </script>
+      <script type="text/javascript" src="js/controlVariables.js"></script>
       <script src="js/orion.js"></script>
       <script src="js/timeline.js"></script>
+      <script type="text/javascript" src="js/treemap.js"></script>
    </head>
    <body>
       <div id="wrapper">
@@ -43,8 +49,8 @@
                      <div class="box-content">
                         <h1 class="tag-title" id="overview1">Overview |</h1>
                         <!-- Es donde se manda a llamar a los treemaps -->
-                        <div>
-                           <iframe src="./treemap01.html" marginwidth="0" marginheight="0" width="500" height="500" scrolling="no"></iframe>
+                        <div id="treemap1">
+                           <div id="chart_div"></div>
                         </div>
                      </div>
                   </div>
@@ -54,7 +60,7 @@
                      <div class="box-content">
                         <h1 class="tag-title" id="details1">Details |</h1>
                         <div>
-                           <iframe src="./treemap02.html" marginwidth="0" marginheight="0" width="900" height="500" scrolling="no"></iframe>
+                           <div id="chart_div2"></div>
                         </div>
                      </div>
                   </div>
@@ -66,7 +72,7 @@
                      <div class="box-content">
                         <h1 class="tag-title" id="overview2">Overview |</h1>
                         <div>
-                           <iframe src="./treemap01.html" marginwidth="0" marginheight="0" width="500" height="500" scrolling="no"></iframe>
+                           
                         </div>
                      </div>
                   </div>
@@ -76,7 +82,7 @@
                      <div class="box-content">
                         <h1 class="tag-title" id="details2">Details |</h1>
                         <div>
-                           <iframe src="./treemap02.html" marginwidth="0" marginheight="0" width="900" height="500" scrolling="no"></iframe>
+
                         </div>
                      </div>
                   </div>

@@ -1,4 +1,4 @@
-var projectId;
+
 $(document).ready(function(){
     var sideMenu = $("#sidebar-nav");
     var project;
@@ -23,8 +23,7 @@ $(document).ready(function(){
                 $('.projects').click(function() {
                     var spanNum = $(this).text();
                     $("#projectHeader").text(spanNum);
-                    projectId = parseInt($(this).attr("id").replace('project',''));
-                    console.log(projectId);
+                    selectedProject = parseInt($(this).attr("id").replace('project',''));
                     getApi();
                 });
             },
