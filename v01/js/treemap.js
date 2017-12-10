@@ -17,10 +17,7 @@ function getTreemapPackagesApi(){
                    for(var i = 0; i<data.resultado.length; i++){
                           delete data.resultado[i].packagelongId;
                           delete data.resultado[i].packageId;
-                          delete data.resultado[i].structId;
-                          delete data.resultado[i].package;
-                          delete data.resultado[i].path;
-                          delete data.resultado[i].percentage;
+                          delete data.resultado[i].shortPackageName;
                    }
                    
                    drawChart(data);
@@ -49,7 +46,7 @@ for(var i = 0; i<treemapData.resultado.length; i++){
   if(i === 0){
       treemap1.addRows([['Revision ' +selectedRevision, null, 0]]);
   }else {
-      treemap1.addRows([[treemapData.resultado[i].shortPackageName, 'Revision ' +selectedRevision, treemapData.resultado[i].children]]);
+      treemap1.addRows([[treemapData.resultado[i].package, 'Revision ' +selectedRevision, treemapData.resultado[i].children]]);
   }
 }
 
@@ -72,8 +69,8 @@ var options = {
 };
 
   tree.draw(treemap1, options);
-  google.visualization.events.addListener(treemap1, 'select', func);
-  google.visualization.events.trigger(treemap1, 'select', null);
+  //google.visualization.events.addListener(treemap1, 'select', func);
+  //google.visualization.events.trigger(treemap1, 'select', null);
   
   // function func() {
   //   alert('Tomela');
