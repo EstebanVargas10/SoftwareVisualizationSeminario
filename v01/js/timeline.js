@@ -88,7 +88,8 @@ function makeYearsCircles(first, last, dates) {
 
   $('.circle1').click(function() {
     var spanNum = $(this).attr('id');
-    slectedYear = $(this).text();
+    selectedYear = $(this).text();
+    $("#dateSelected").text("Fecha seleccionada: "+selectedYear);
     selectDate(spanNum);
     makeMonthsCircles();
   });
@@ -96,7 +97,7 @@ function makeYearsCircles(first, last, dates) {
 
 function makeMonthsCircles() {
   $("#line2").show();
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   //Forget the timeline if there's only one date. Who needs it!?
   if (months.length < 2) {
@@ -132,7 +133,8 @@ function makeMonthsCircles() {
   $(".circle2").click(function() {
     var spanNum = $(this).attr("id");
     selectedMonth = parseInt($(this).attr("id").replace('month',''));
-    slectedMonth = selectedMonth + 1;
+    selectedMonth = selectedMonth + 1;
+    $("#dateSelected").text("Fecha seleccionada: "+selectedMonth+"/"+selectedYear);
     selectDate(spanNum);
     getApiDays();
   });
@@ -144,7 +146,7 @@ function getApiDays(){
    var exist = false;
 
    for(var i = 0; i<originalApiInfo.resultado.length; i++){
-    if(originalApiInfo.resultado[i].year == slectedYear && originalApiInfo.resultado[i].month == slectedMonth){
+    if(originalApiInfo.resultado[i].year == selectedYear && originalApiInfo.resultado[i].month == selectedMonth){
       for(var j = 0; j<days.length; j++){
             if(originalApiInfo.resultado[i].day == days[j]){
               exist = true;
@@ -204,9 +206,10 @@ function makeDaysCircles(firstDay, lastDay, days){
     var spanNum = $(this).attr("id");
     selectedDay = parseInt($(this).attr("id").replace('day',''));
     selectedDay = selectedDay + 1;
+    $("#dateSelected").text("Fecha seleccionada: "+selectedDay+"/"+selectedMonth+"/"+selectedYear);
     selectDate(spanNum);
-    $("#overview1").text("Overview | "+selectedDay + "/"+slectedMonth +"/"+slectedYear);
-    $("#details1").text("Details | "+selectedDay + "/"+slectedMonth +"/"+slectedYear);
+    $("#overview1").text("Vista General | "+selectedDay + "/"+selectedMonth +"/"+selectedYear);
+    $("#details1").text("Vista Detallada | "+selectedDay + "/"+selectedMonth +"/"+selectedYear);
     getApiRevisions();
   });
 }
@@ -217,7 +220,7 @@ function getApiRevisions(){
    var exist = false;
 
    for(var i = 0; i<originalApiInfo.resultado.length; i++){
-    if(originalApiInfo.resultado[i].year == slectedYear && originalApiInfo.resultado[i].month == slectedMonth && originalApiInfo.resultado[i].day == selectedDay){
+    if(originalApiInfo.resultado[i].year == selectedYear && originalApiInfo.resultado[i].month == selectedMonth && originalApiInfo.resultado[i].day == selectedDay){
       for(var j = 0; j<revisions.length; j++){
             if(originalApiInfo.resultado[i].revision == revisions[j]){
               exist = true;
@@ -278,6 +281,7 @@ function makeRevisionsCircles(revisions){
     var spanNum = $(this).attr("id");
     selectedRevision = parseInt($(this).text());
     getTreemapPackagesApi();
+    getTreemapPackagesApi2();
     selectDate(spanNum);
   });
 }

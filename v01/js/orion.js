@@ -18,7 +18,7 @@ $(document).ready(function(){
 
                 for(var i=0; i<data.resultado.length; i++){
                     project = JSON.stringify(data.resultado[i].project).replace(/"/g, '');
-                    sideMenu.append('<li><a href="#" class="projects" id="project'+ (i+1)+'">'+ project +'</a></li>');
+                    sideMenu.append('<li><a href="#" class="projects" id="project'+ data.resultado[i].projectId+'">'+ project +'</a></li>');
                 }
                 $('.projects').click(function() {
                     var spanNum = $(this).text();
