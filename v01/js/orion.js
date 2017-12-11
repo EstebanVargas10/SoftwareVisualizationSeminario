@@ -25,6 +25,7 @@ $(document).ready(function(){
                     $("#projectHeader").text(spanNum);
                     selectedProject = parseInt($(this).attr("id").replace('project',''));
                     getApi();
+                    getApi2();
                 });
             },
 

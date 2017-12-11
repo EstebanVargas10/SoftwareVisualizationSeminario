@@ -151,7 +151,7 @@ function getTreemapPackagesApi2(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId=000"+selectedProject+"0000"+selectedRevision,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId=000"+selectedProject+"0000"+selectedRevision2,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -187,9 +187,9 @@ treemap1.addColumn('number', 'Number Of Lines');
 
 for(var i = 0; i<treemapData.resultado.length; i++){
   if(i === 0){
-      treemap1.addRows([['Revision ' +selectedRevision, null, 0]]);
+      treemap1.addRows([['Revision ' +selectedRevision2, null, 0]]);
   }else {
-      treemap1.addRows([[treemapData.resultado[i].package, 'Revision ' +selectedRevision, treemapData.resultado[i].children]]);
+      treemap1.addRows([[treemapData.resultado[i].package, 'Revision ' +selectedRevision2, treemapData.resultado[i].children]]);
   }
 }
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div3'));
@@ -224,7 +224,7 @@ function getTreemapFilesApi2(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId=000"+selectedProject+"0000"+selectedRevision+"0000" + selectedPackage,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId=000"+selectedProject+"0000"+selectedRevision2+"0000" + selectedPackage2,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -264,9 +264,9 @@ data.addColumn('number', 'Number Of Lines');
 
 for(var i = 0; i<treemapData.resultado.length; i++){
   if(i === 0){
-      data.addRows([['Package '+selectedPackage , null, 0]]);
+      data.addRows([['Package '+selectedPackage2 , null, 0]]);
   }else {
-      data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage, 1]]);
+      data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage2, 1]]);
   }
 }
 
