@@ -1,11 +1,10 @@
 var originalApiInfo;
-var secondApiInfo;
 function getApi(){
   try {
         $.ajax({
             async: true,
             crossDomain: true,
-            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=000" +selectedProject,
+            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=" +selectedProject,
             type: 'GET',
             dataType: 'json',
             xhrFields: {
@@ -31,6 +30,7 @@ function getApi(){
                  }
                  years.sort(function(a, b){return a-b;});
                  makeYearsCircles(years[0], years[years.length -1], years);
+                 makeYearsCircles2(years[0], years[years.length -1], years);
             },
 
             error: function (jqXHR, textStatus, errorThrown) {
@@ -306,50 +306,6 @@ function selectDate(selector) {
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function getApi2(){
-  try {
-        $.ajax({
-            async: true,
-            crossDomain: true,
-            url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetAllPackageRevision?projectlongId=000" +selectedProject,
-            type: 'GET',
-            dataType: 'json',
-            xhrFields: {
-                withCredentials: false
-            },
-            processData: false,
-
-            success: function (data, status) {
-
-                 secondApiInfo = data; 
-                 var years = [];
-                 var exist = false;
-
-                 for(var i = 0; i<data.resultado.length; i++){
-                        for(var j = 0; j<years.length; j++){
-                          if(data.resultado[i].year == years[j]){
-                            exist = true;
-                          }
-                        }if(!exist){
-                          years.push(data.resultado[i].year);
-                        }
-                        exist = false;
-                 }
-                 years.sort(function(a, b){return a-b;});
-                 makeYearsCircles2(years[0], years[years.length -1], years);
-            },
-
-            error: function (jqXHR, textStatus, errorThrown) {
-              alert("No existen fechas para ese paquete");
-                console.log("Estado de la conexión: " + textStatus + " ");
-                console.log("Error de conexión: " + errorThrown + " ");
-            }
-        });
-    } catch (err) {
-        console.log("Ocurrio un error: " + err);
-    }// fin catch
-}
-
 //Main function. Draw your circles.
 function makeYearsCircles2(first, last, dates) {
 
@@ -452,14 +408,14 @@ function getApiDays2(){
    var days = [];
    var exist = false;
 
-   for(var i = 0; i<secondApiInfo.resultado.length; i++){
-    if(secondApiInfo.resultado[i].year == selectedYear2 && secondApiInfo.resultado[i].month == selectedMonth2){
+   for(var i = 0; i<originalApiInfo.resultado.length; i++){
+    if(originalApiInfo.resultado[i].year == selectedYear2 && originalApiInfo.resultado[i].month == selectedMonth2){
       for(var j = 0; j<days.length; j++){
-            if(secondApiInfo.resultado[i].day == days[j]){
+            if(originalApiInfo.resultado[i].day == days[j]){
               exist = true;
             }
           }if(!exist){
-            days.push(secondApiInfo.resultado[i].day);
+            days.push(originalApiInfo.resultado[i].day);
           }
           exist = false;
     }
@@ -526,14 +482,14 @@ function getApiRevisions2(){
    var revisions = [];
    var exist = false;
 
-   for(var i = 0; i<secondApiInfo.resultado.length; i++){
-    if(secondApiInfo.resultado[i].year == selectedYear2 && secondApiInfo.resultado[i].month == selectedMonth2 && secondApiInfo.resultado[i].day == selectedDay2){
+   for(var i = 0; i<originalApiInfo.resultado.length; i++){
+    if(originalApiInfo.resultado[i].year == selectedYear2 && originalApiInfo.resultado[i].month == selectedMonth2 && originalApiInfo.resultado[i].day == selectedDay2){
       for(var j = 0; j<revisions.length; j++){
-            if(secondApiInfo.resultado[i].revision == revisions[j]){
+            if(originalApiInfo.resultado[i].revision == revisions[j]){
               exist = true;
             }
           }if(!exist){
-            revisions.push(secondApiInfo.resultado[i].revision);
+            revisions.push(originalApiInfo.resultado[i].revision);
           }
           exist = false;
     }

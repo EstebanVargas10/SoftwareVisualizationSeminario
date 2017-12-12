@@ -4,7 +4,7 @@ function getTreemapPackagesApi(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId=000"+selectedProject+"0000"+selectedRevision,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId="+selectedProject+"0000"+selectedRevision,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -77,7 +77,7 @@ function getTreemapFilesApi(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId=000"+selectedProject+"0000"+selectedRevision+"0000" + selectedPackage,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId="+selectedProject+"0000"+selectedRevision+"0000" + selectedPackage,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -151,7 +151,7 @@ function getTreemapPackagesApi2(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId=000"+selectedProject+"0000"+selectedRevision2,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId="+selectedProject+"0000"+selectedRevision2,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -214,7 +214,7 @@ var options = {
   google.visualization.events.addListener(tree, 'select', findPackageId2);
   function findPackageId2() {
     var row = tree.getSelection()[0].row;
-    selectedPackage = row;
+    selectedPackage2 = row;
     getTreemapFilesApi2();
   }
 }
@@ -224,7 +224,7 @@ function getTreemapFilesApi2(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId=000"+selectedProject+"0000"+selectedRevision2+"0000" + selectedPackage2,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId="+selectedProject+"0000"+selectedRevision2+"0000" + selectedPackage2,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
