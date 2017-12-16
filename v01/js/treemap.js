@@ -32,6 +32,23 @@ function getTreemapPackagesApi(){
       }// fin catch
   }
 
+
+var options = {
+  highlightOnMouseOver: true,
+  maxDepth: 1,
+  maxPostDepth: 2,
+  minHighlightColor: '#8c6bb1',
+  midHighlightColor: '#9ebcda',
+  maxHighlightColor: '#edf8fb',
+  minColor: '#009688',
+  midColor: '#e0bcbc',
+  maxColor: '#ee8100',
+  headerHeight: 15,
+  showScale: true,
+  height: 500,
+  useWeightedAverageForAggregation: true
+};
+
 function drawChart(treemapData) {
 var treemap1 = new google.visualization.DataTable();
 treemap1.addColumn('string', 'ID');
@@ -46,22 +63,6 @@ for(var i = 0; i<treemapData.resultado.length; i++){
   }
 }
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
-
-var options = {
-  highlightOnMouseOver: true,
-  maxDepth: 1,
-  maxPostDepth: 2,
-  minHighlightColor: '#8c6bb1',
-  midHighlightColor: '#9ebcda',
-  maxHighlightColor: '#edf8fb',
-  minColor: '#009688',
-  midColor: '#f7f7f7',
-  maxColor: '#ee8100',
-  headerHeight: 15,
-  showScale: true,
-  height: 500,
-  useWeightedAverageForAggregation: true
-};
 
   tree.draw(treemap1, options);
   google.visualization.events.addListener(tree, 'select', findPackageId);
@@ -125,22 +126,6 @@ for(var i = 0; i<treemapData.resultado.length; i++){
 
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div2'));
 
-var options = {
-  highlightOnMouseOver: true,
-  maxDepth: 1,
-  maxPostDepth: 2,
-  minHighlightColor: '#8c6bb1',
-  midHighlightColor: '#9ebcda',
-  maxHighlightColor: '#edf8fb',
-  minColor: '#009688',
-  midColor: '#f7f7f7',
-  maxColor: '#ee8100',
-  headerHeight: 15,
-  showScale: true,
-  height: 500,
-  useWeightedAverageForAggregation: true
-};
-
   tree.draw(data, options);
 }
 
@@ -193,22 +178,6 @@ for(var i = 0; i<treemapData.resultado.length; i++){
   }
 }
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div3'));
-
-var options = {
-  highlightOnMouseOver: true,
-  maxDepth: 1,
-  maxPostDepth: 2,
-  minHighlightColor: '#8c6bb1',
-  midHighlightColor: '#9ebcda',
-  maxHighlightColor: '#edf8fb',
-  minColor: '#009688',
-  midColor: '#f7f7f7',
-  maxColor: '#ee8100',
-  headerHeight: 15,
-  showScale: true,
-  height: 500,
-  useWeightedAverageForAggregation: true
-};
 
   tree.draw(treemap1, options);
   google.visualization.events.addListener(tree, 'select', findPackageId2);
@@ -271,22 +240,6 @@ for(var i = 0; i<treemapData.resultado.length; i++){
 }
 
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div4'));
-
-var options = {
-  highlightOnMouseOver: true,
-  maxDepth: 1,
-  maxPostDepth: 2,
-  minHighlightColor: '#8c6bb1',
-  midHighlightColor: '#9ebcda',
-  maxHighlightColor: '#edf8fb',
-  minColor: '#009688',
-  midColor: '#f7f7f7',
-  maxColor: '#ee8100',
-  headerHeight: 15,
-  showScale: true,
-  height: 500,
-  useWeightedAverageForAggregation: true
-};
 
   tree.draw(data, options);
 }
