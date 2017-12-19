@@ -58,13 +58,13 @@
 .circle .popupSpan, .circle2b .popupSpan2 {
   width: auto;
   height: auto;
-  padding: 10px;
+  padding: 15px;
   white-space: nowrap;
   display: inline-block;
   color: #20B2AA;
-  position: relative;
+  position: absolute;
   top: 12px;
-  left: -75px;
+  left: -80px;
   display: none;
   transition: all 0.1s ease-out;
 }
@@ -75,5 +75,5 @@
   display: block;
 }
 .circle.active .popupSpan, .circle2b.active .popupSpan2 {
-  top: -20px;
+  top: 14px;
 }
