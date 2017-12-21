@@ -1,10 +1,11 @@
-
+var firstPackage;
+var secondPackage;
 function getTreemapPackagesApi(){
     try {
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId="+selectedProject+"0000"+selectedRevision,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId="+selectedRevision,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -15,9 +16,9 @@ function getTreemapPackagesApi(){
               success: function (data, status) {
 
                    for(var i = 0; i<data.resultado.length; i++){
-                          delete data.resultado[i].packagelongId;
+                          delete data.resultado[i].packageId;
                    }
-                   
+                   firstPackage = data;
                    drawChart(data);
               },
 
@@ -69,9 +70,31 @@ var tree = new google.visualization.TreeMap(document.getElementById('chart_div')
 
   tree.draw(treemap1, options);
   google.visualization.events.addListener(tree, 'select', findPackageId);
+
   function findPackageId() {
-    var row = tree.getSelection()[0].row;
-    selectedPackage = row -1;
+  var selection = tree.getSelection();
+  var nodePackage;
+  var message = '';
+  for (var i = 0; i < selection.length; i++) {
+    var item = selection[i];
+    if (item.row != null && item.column != null) {
+      nodePackage = treemap1.getFormattedValue(item.row, item.column);
+    } else if (item.row != null) {
+      nodePackage = treemap1.getFormattedValue(item.row, 0);
+    } else if (item.column != null) {
+      nodePackage = treemap1.getFormattedValue(0, item.column);
+    }
+  }
+  if (message == '') {
+    message = 'no ha seleccionado datos';
+  }
+  alert('You selected ' + nodePackage);
+
+  for(var k=0; k < firstPackage.resultado.length; k++){
+      if(nodePackage == firstPackage.resultado[k].package){
+        selectedPackage = firstPackage.resultado[k].packagelongId;
+      }
+    }
     getTreemapFilesApi();
   }
 }
@@ -81,7 +104,7 @@ function getTreemapFilesApi(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId="+selectedProject+"0000"+selectedRevision+"0000" + selectedPackage,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId="+selectedPackage,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -119,10 +142,10 @@ data.addColumn('string', 'ID');
 data.addColumn('string', 'Parent');
 data.addColumn('number', 'Number Of Lines');
 
-data.addRows([['Package '+selectedPackage , null, 0]]);
+data.addRows([['Package '+selectedPackage.slice(selectedPackage.length -2, selectedPackage.length) , null, 0]]);
 
 for(var i = 0; i<treemapData.resultado.length; i++){
-  data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage, treemapData.resultado[i].numberlines]]);
+  data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage.slice(selectedPackage.length -2, selectedPackage.length), treemapData.resultado[i].numberlines]]);
 }
 
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div2'));
@@ -137,7 +160,7 @@ function getTreemapPackagesApi2(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId="+selectedProject+"0000"+selectedRevision2,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/GetPackagesByRevision?revisionId="+selectedRevision2,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -148,9 +171,9 @@ function getTreemapPackagesApi2(){
               success: function (data, status) {
 
                    for(var i = 0; i<data.resultado.length; i++){
-                          delete data.resultado[i].packagelongId;
+                          delete data.resultado[i].packageId;
                    }
-                   
+                   secondPackage = data;
                    drawChart3(data);
               },
 
@@ -184,9 +207,30 @@ var tree = new google.visualization.TreeMap(document.getElementById('chart_div3'
 
   tree.draw(treemap1, options);
   google.visualization.events.addListener(tree, 'select', findPackageId2);
+  
   function findPackageId2() {
-    var row = tree.getSelection()[0].row;
-    selectedPackage2 = row -1;
+  var selection = tree.getSelection();
+  var nodePackage;
+  for (var i = 0; i < selection.length; i++) {
+    var item = selection[i];
+    if (item.row != null && item.column != null) {
+      nodePackage = treemap1.getFormattedValue(item.row, item.column);
+    } else if (item.row != null) {
+      nodePackage = treemap1.getFormattedValue(item.row, 0);
+    } else if (item.column != null) {
+      nodePackage = treemap1.getFormattedValue(0, item.column);
+    }
+  }
+  if (nodePackage == '') {
+    nodePackage = 'no ha seleccionado datos';
+  }
+  alert('You selected ' + nodePackage);
+
+  for(var k=0; k < secondPackage.resultado.length; k++){
+      if(nodePackage == secondPackage.resultado[k].package){
+        selectedPackage2 = secondPackage.resultado[k].packagelongId;
+      }
+    }
     getTreemapFilesApi2();
   }
 }
@@ -196,7 +240,7 @@ function getTreemapFilesApi2(){
           $.ajax({
               async: true,
               crossDomain: true,
-              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId="+selectedProject+"0000"+selectedRevision2+"0000" + selectedPackage2,
+              url: "http://softwarerepositoryws.gonzalez.cr/api/SoftwareVisualization/uspGetFilesByPackage?packagelongId="+selectedPackage2,
               type: 'GET',
               dataType: 'json',
               xhrFields: {
@@ -234,10 +278,10 @@ data.addColumn('string', 'ID');
 data.addColumn('string', 'Parent');
 data.addColumn('number', 'Number Of Lines');
 
-data.addRows([['Package '+selectedPackage2 , null, 0]]);
+data.addRows([['Package '+selectedPackage2.slice(selectedPackage2.length -2, selectedPackage2.length) , null, 0]]);
 
 for(var i = 0; i<treemapData.resultado.length; i++){
-      data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage2, treemapData.resultado[i].numberlines]]);
+      data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage2.slice(selectedPackage2.length -2, selectedPackage2.length), treemapData.resultado[i].numberlines]]);
 }
 
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div4'));

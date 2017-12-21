@@ -222,11 +222,11 @@ function getApiRevisions(){
    for(var i = 0; i<originalApiInfo.resultado.length; i++){
     if(originalApiInfo.resultado[i].year == selectedYear && originalApiInfo.resultado[i].month == selectedMonth && originalApiInfo.resultado[i].day == selectedDay){
       for(var j = 0; j<revisions.length; j++){
-            if(originalApiInfo.resultado[i].revision == revisions[j]){
+            if(originalApiInfo.resultado[i].revisionId == revisions[j]){
               exist = true;
             }
           }if(!exist){
-            revisions.push(originalApiInfo.resultado[i].revision);
+            revisions.push(originalApiInfo.resultado[i].revisionId);
           }
           exist = false;
     }
@@ -247,7 +247,7 @@ function makeRevisionsCircles(revisions){
     var lastInt = ((lastDay - firstDay) * 30) + (lastDay - firstDay);
 
     //Draw first date circle
-    $("#line4").append('<div class="circle circle4" id="revision0" style="left: ' + 0 + '%;"><div class="popupSpan">' + revisions[0] + '</div></div>');
+    $("#line4").append('<div class="circle circle4" id="revision'+revisions[0]+'" style="left: ' + 0 + '%;"><div class="popupSpan">' + revisions[0].slice(revisions[0].length -4, revisions[0].length) + '</div></div>');
 
     //Loop through middle dates
     for (i = 1; i < revisions.length - 1; i++) {
@@ -260,11 +260,11 @@ function makeRevisionsCircles(revisions){
       var relativeInt = thisInt / lastInt;
 
       //Draw the date circle
-      $("#line4").append('<div class="circle circle4" id="revision' + i + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + revisions[i] + '</div></div>');
+      $("#line4").append('<div class="circle circle4" id="revision' + revisions[i] + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + revisions[i].slice(revisions[i].length -4, revisions[i].length) + '</div></div>');
     }
 
     //Draw the last date circle
-    $("#line4").append('<div class="circle circle4" id="revision' + (revisions.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + revisions[revisions.length - 1] + '</div></div>');
+    $("#line4").append('<div class="circle circle4" id="revision' + revisions[revisions.length - 1] + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + revisions[revisions.length - 1].slice(revisions[revisions.length - 1].length -4, revisions[revisions.length - 1].length) + '</div></div>');
   }
 
   $(".circle:first").addClass("active");
@@ -279,7 +279,7 @@ function makeRevisionsCircles(revisions){
 
   $(".circle4").click(function() {
     var spanNum = $(this).attr("id");
-    selectedRevision = parseInt($(this).text());
+    selectedRevision = $(this).attr("id").replace('revision','');
     getTreemapPackagesApi();
     selectDate(spanNum);
   });
@@ -485,11 +485,11 @@ function getApiRevisions2(){
    for(var i = 0; i<originalApiInfo.resultado.length; i++){
     if(originalApiInfo.resultado[i].year == selectedYear2 && originalApiInfo.resultado[i].month == selectedMonth2 && originalApiInfo.resultado[i].day == selectedDay2){
       for(var j = 0; j<revisions.length; j++){
-            if(originalApiInfo.resultado[i].revision == revisions[j]){
+            if(originalApiInfo.resultado[i].revisionId == revisions[j]){
               exist = true;
             }
           }if(!exist){
-            revisions.push(originalApiInfo.resultado[i].revision);
+            revisions.push(originalApiInfo.resultado[i].revisionId);
           }
           exist = false;
     }
@@ -510,7 +510,7 @@ function makeRevisionsCircles2(revisions){
     var lastInt = ((lastDay - firstDay) * 30) + (lastDay - firstDay);
 
     //Draw first date circle
-    $("#lineB4").append('<div class="circle2b circleb4" id="revisionb0" style="left: ' + 0 + '%;"><div class="popupSpan2">' + revisions[0] + '</div></div>');
+    $("#lineB4").append('<div class="circle2b circleb4" id="revisionb'+revisions[0]+'" style="left: ' + 0 + '%;"><div class="popupSpan2">' + revisions[0].slice(revisions[0].length -4, revisions[0].length) + '</div></div>');
 
     //Loop through middle dates
     for (i = 1; i < revisions.length - 1; i++) {
@@ -523,11 +523,11 @@ function makeRevisionsCircles2(revisions){
       var relativeInt = thisInt / lastInt;
 
       //Draw the date circle
-      $("#lineB4").append('<div class="circle2b circleb4" id="revisionb' + i + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan2">' + revisions[i] + '</div></div>');
+      $("#lineB4").append('<div class="circle2b circleb4" id="revisionb' + revisions[i] + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan2">' + revisions[i].slice(revisions[i].length -4, revisions[i].length) + '</div></div>');
     }
 
     //Draw the last date circle
-    $("#lineB4").append('<div class="circle2b circleb4" id="revisionb' + (revisions.length - 1) + '" style="left: ' + 99 + '%;"><div class="popupSpan2">' + revisions[revisions.length - 1] + '</div></div>');
+    $("#lineB4").append('<div class="circle2b circleb4" id="revisionb' + revisions[revisions.length - 1]+ '" style="left: ' + 99 + '%;"><div class="popupSpan2">' + revisions[revisions.length - 1].slice(revisions[revisions.length - 1].length -4, revisions[revisions.length - 1].length) + '</div></div>');
   }
 
   $(".circle2b:first").addClass("active");
@@ -542,7 +542,7 @@ function makeRevisionsCircles2(revisions){
 
   $(".circleb4").click(function() {
     var spanNum = $(this).attr("id");
-    selectedRevision2 = parseInt($(this).text());
+    selectedRevision2 = $(this).attr("id").replace("revisionb", "");
     getTreemapPackagesApi2();
     selectDate2(spanNum);
   });

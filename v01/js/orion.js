@@ -24,12 +24,7 @@ $(document).ready(function(){
                     var spanNum = $(this).text();
                     $("#projectHeader").text(spanNum);
 
-                    selectedProject = parseInt($(this).attr("id").replace('project',''));
-                    if(selectedProject>=10){
-                        selectedProject = "00"+selectedProject;
-                    }else{
-                        selectedProject = "000"+selectedProject;
-                    }
+                    selectedProject = $(this).attr("id").replace('project','');
                     getApi();
                 });
             },
