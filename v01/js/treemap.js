@@ -35,8 +35,8 @@ function getTreemapPackagesApi(){
 
 var options = {
   highlightOnMouseOver: true,
-  maxDepth: 1,
-  maxPostDepth: 2,
+  maxDepth: 100,
+  maxPostDepth: 0,
   minHighlightColor: '#8c6bb1',
   midHighlightColor: '#9ebcda',
   maxHighlightColor: '#edf8fb',
@@ -55,20 +55,23 @@ treemap1.addColumn('string', 'ID');
 treemap1.addColumn('string', 'Parent');
 treemap1.addColumn('number', 'Number Of Lines');
 
+treemap1.addRows([["Revision" + selectedRevision, null, 0]])
+
 for(var i = 0; i<treemapData.resultado.length; i++){
-  if(i === 0){
-      treemap1.addRows([['Revision ' +selectedRevision, null, 0]]);
+  if(treemapData.resultado[i].package.indexOf(".") == -1){
+      treemap1.addRows([[treemapData.resultado[i].package, "Revision" + selectedRevision, 0]]);
   }else {
-      treemap1.addRows([[treemapData.resultado[i].package, 'Revision ' +selectedRevision, treemapData.resultado[i].children]]);
+      treemap1.addRows([[treemapData.resultado[i].package, treemapData.resultado[i].package.slice(0, treemapData.resultado[i].package.lastIndexOf(".")), (treemapData.resultado[i].children)]]);
   }
 }
+
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
 
   tree.draw(treemap1, options);
   google.visualization.events.addListener(tree, 'select', findPackageId);
   function findPackageId() {
     var row = tree.getSelection()[0].row;
-    selectedPackage = row;
+    selectedPackage = row -1;
     getTreemapFilesApi();
   }
 }
@@ -116,12 +119,10 @@ data.addColumn('string', 'ID');
 data.addColumn('string', 'Parent');
 data.addColumn('number', 'Number Of Lines');
 
+data.addRows([['Package '+selectedPackage , null, 0]]);
+
 for(var i = 0; i<treemapData.resultado.length; i++){
-  if(i === 0){
-      data.addRows([['Package '+selectedPackage , null, 0]]);
-  }else {
-      data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage, 1]]);
-  }
+  data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage, treemapData.resultado[i].numberlines]]);
 }
 
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div2'));
@@ -170,11 +171,13 @@ treemap1.addColumn('string', 'ID');
 treemap1.addColumn('string', 'Parent');
 treemap1.addColumn('number', 'Number Of Lines');
 
+treemap1.addRows([["Revision" + selectedRevision2, null, 0]])
+
 for(var i = 0; i<treemapData.resultado.length; i++){
-  if(i === 0){
-      treemap1.addRows([['Revision ' +selectedRevision2, null, 0]]);
+  if(treemapData.resultado[i].package.indexOf(".") == -1){
+      treemap1.addRows([[treemapData.resultado[i].package, "Revision" + selectedRevision2, 0]]);
   }else {
-      treemap1.addRows([[treemapData.resultado[i].package, 'Revision ' +selectedRevision2, treemapData.resultado[i].children]]);
+      treemap1.addRows([[treemapData.resultado[i].package, treemapData.resultado[i].package.slice(0, treemapData.resultado[i].package.lastIndexOf(".")), (treemapData.resultado[i].children)]]);
   }
 }
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div3'));
@@ -183,7 +186,7 @@ var tree = new google.visualization.TreeMap(document.getElementById('chart_div3'
   google.visualization.events.addListener(tree, 'select', findPackageId2);
   function findPackageId2() {
     var row = tree.getSelection()[0].row;
-    selectedPackage2 = row;
+    selectedPackage2 = row -1;
     getTreemapFilesApi2();
   }
 }
@@ -231,12 +234,10 @@ data.addColumn('string', 'ID');
 data.addColumn('string', 'Parent');
 data.addColumn('number', 'Number Of Lines');
 
+data.addRows([['Package '+selectedPackage2 , null, 0]]);
+
 for(var i = 0; i<treemapData.resultado.length; i++){
-  if(i === 0){
-      data.addRows([['Package '+selectedPackage2 , null, 0]]);
-  }else {
-      data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage2, 1]]);
-  }
+      data.addRows([[treemapData.resultado[i].fileName, 'Package '+selectedPackage2, treemapData.resultado[i].numberlines]]);
 }
 
 var tree = new google.visualization.TreeMap(document.getElementById('chart_div4'));

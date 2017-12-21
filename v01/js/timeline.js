@@ -468,7 +468,7 @@ function makeDaysCircles2(firstDay, lastDay, days){
   $(".circleb3").click(function() {
     var spanNum = $(this).attr("id");
     selectedDay2 = parseInt($(this).attr("id").replace('dayb',''));
-    selectedDay2 = selectedDay2 + 1;
+    selectedDay2 = selectedDay2;
     $("#dateSelectedB").text("Fecha seleccionada: "+selectedDay2+"/"+selectedMonth2+"/"+selectedYear2);
     selectDate2(spanNum);
     $("#overview2").text("Vista General B | "+selectedDay2 + "/"+selectedMonth2 +"/"+selectedYear2);

@@ -30,9 +30,7 @@ $(document).ready(function(){
                     }else{
                         selectedProject = "000"+selectedProject;
                     }
-                    console.log(selectedProject);
                     getApi();
-                    //getApi2();
                 });
             },
 
