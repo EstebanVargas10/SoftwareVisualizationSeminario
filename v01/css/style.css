@@ -77,3 +77,8 @@
 .circle.active .popupSpan, .circle2b.active .popupSpan2 {
   top: 14px;
 }
+.selected {
+    fill: pink!important;
+    stroke: red!important;
+    stroke-width: 4!important;  
+}
