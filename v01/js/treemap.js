@@ -111,6 +111,8 @@ function drawChart(treemapData) {
         }
         /*No se hace zoom*/
         tree.setSelection(null);
+        //pinta el cuadro
+        $("g:contains('" + nodePackage + "')").find('rect').addClass('selected');
         getTreemapFilesApi();
     }
 }
@@ -284,6 +286,8 @@ function drawChart3(treemapData) {
         }
         /*No se hace zoom*/
         tree.setSelection(null);
+        //pinta el cuadro
+        $("g:contains('" + nodePackage + "')").find('rect').addClass('selected');
         getTreemapFilesApi2();
     }
 }
