@@ -161,7 +161,7 @@ function drawChart2(treemapData) {
 
     data.addRows([
         [
-            'Package ' +
+            'Paquete ' +
             selectedPackage.slice(
                 selectedPackage.length - 2,
                 selectedPackage.length,
@@ -175,7 +175,7 @@ function drawChart2(treemapData) {
         data.addRows([
             [
                 treemapData.resultado[i].fileName,
-                'Package ' +
+                'Paquete ' +
                 selectedPackage.slice(
                     selectedPackage.length - 2,
                     selectedPackage.length,
@@ -336,7 +336,7 @@ function drawChart4(treemapData) {
 
     data.addRows([
         [
-            'Package ' +
+            'Paquete ' +
             selectedPackage2.slice(
                 selectedPackage2.length - 2,
                 selectedPackage2.length,
@@ -350,7 +350,7 @@ function drawChart4(treemapData) {
         data.addRows([
             [
                 treemapData.resultado[i].fileName,
-                'Package ' +
+                'Paquete ' +
                 selectedPackage2.slice(
                     selectedPackage2.length - 2,
                     selectedPackage2.length,
