@@ -100,10 +100,9 @@ function drawChart(treemapData) {
                 nodePackage = treemap1.getFormattedValue(0, item.column);
             }
         }
-        if (message == '') {
-            message = 'no ha seleccionado datos';
+        if (nodePackage == '') {
+            alert('no ha seleccionado datos');
         }
-        alert('You selected ' + nodePackage);
 
         for (var k = 0; k < firstPackage.resultado.length; k++) {
             if (nodePackage == firstPackage.resultado[k].package) {
@@ -275,9 +274,8 @@ function drawChart3(treemapData) {
             }
         }
         if (nodePackage == '') {
-            nodePackage = 'no ha seleccionado datos';
+            alert('no ha seleccionado datos');
         }
-        alert('You selected ' + nodePackage);
 
         for (var k = 0; k < secondPackage.resultado.length; k++) {
             if (nodePackage == secondPackage.resultado[k].package) {
