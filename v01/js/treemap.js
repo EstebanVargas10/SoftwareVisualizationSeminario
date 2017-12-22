@@ -57,13 +57,13 @@ function drawChart(treemapData) {
     treemap1.addColumn('number', 'Number Of Lines');
 
     treemap1.addRows([
-        ['Revision' + selectedRevision, null, 0]
+        ['Revision ' + selectedRevision.slice(selectedRevision.length -4, selectedRevision.length), null, 0]
     ]);
 
     for (var i = 0; i < treemapData.resultado.length; i++) {
         if (treemapData.resultado[i].package.indexOf('.') == -1) {
             treemap1.addRows([
-                [treemapData.resultado[i].package, 'Revision' + selectedRevision, 0],
+                [treemapData.resultado[i].package, 'Revision ' + selectedRevision.slice(selectedRevision.length -4, selectedRevision.length), 0],
             ]);
         } else {
             treemap1.addRows([
@@ -100,10 +100,9 @@ function drawChart(treemapData) {
                 nodePackage = treemap1.getFormattedValue(0, item.column);
             }
         }
-        if (message == '') {
-            message = 'no ha seleccionado datos';
+        if (nodePackage == '') {
+            alert('no ha seleccionado datos');
         }
-        alert('You selected ' + nodePackage);
 
         for (var k = 0; k < firstPackage.resultado.length; k++) {
             if (nodePackage == firstPackage.resultado[k].package) {
@@ -233,13 +232,13 @@ function drawChart3(treemapData) {
     treemap1.addColumn('number', 'Number Of Lines');
 
     treemap1.addRows([
-        ['Revision' + selectedRevision2, null, 0]
+        ['Revision ' + selectedRevision2.slice(selectedRevision2.length -4, selectedRevision2.length), null, 0]
     ]);
 
     for (var i = 0; i < treemapData.resultado.length; i++) {
         if (treemapData.resultado[i].package.indexOf('.') == -1) {
             treemap1.addRows([
-                [treemapData.resultado[i].package, 'Revision' + selectedRevision2, 0],
+                [treemapData.resultado[i].package, 'Revision ' + selectedRevision2.slice(selectedRevision2.length -4, selectedRevision2.length), 0],
             ]);
         } else {
             treemap1.addRows([
@@ -275,9 +274,8 @@ function drawChart3(treemapData) {
             }
         }
         if (nodePackage == '') {
-            nodePackage = 'no ha seleccionado datos';
+            alert('no ha seleccionado datos');
         }
-        alert('You selected ' + nodePackage);
 
         for (var k = 0; k < secondPackage.resultado.length; k++) {
             if (nodePackage == secondPackage.resultado[k].package) {
